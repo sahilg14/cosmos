@@ -77,12 +77,21 @@ const useStyles = makeStyles(theme => ({
   fixedHeight: {
     height: 240
   },
+  fixedHeightLong: {
+    height: 300
+  },
   submit: {
     margin: theme.spacing(3, 0, 2)
   },
   form: {
     width: "100%", // Fix IE 11 issue.
-    marginTop: theme.spacing(1)
+    height: "100%",
+    marginTop: theme.spacing(1),
+    display: "flex",
+    flexWrap: "wrap",
+    alignItems: "center",
+    alignContent: "space-between",
+    justifyContent: "center"
   }
 }));
 export default useStyles;

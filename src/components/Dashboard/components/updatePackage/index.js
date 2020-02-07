@@ -43,7 +43,7 @@ const EmployeeUpdate = () => {
       </Grid>
       {/* Add a new ID */}
       <Grid item xs={12} md={3} lg={3}>
-        <Paper className={fixedHeightPaper}>
+        <Paper className={clsx(classes.paper, classes.fixedHeightLong)}>
           <Title>Add new employee ID</Title>
           <form className={classes.form} noValidate>
             <TextField
