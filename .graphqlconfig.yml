@@ -1,8 +1,8 @@
 projects:
   addEmployee:
-    schemaPath: src/graphql/schema.json
+    schemaPath: amplify/backend/api/addEmployee/build/schema.graphql
     includes:
-      - src/services/addEmployee.js
+      - src/graphql/**/*.js
     excludes:
       - ./amplify/**
     extensions:
@@ -10,6 +10,6 @@ projects:
         codeGenTarget: javascript
         generatedFileName: ''
         docsFilePath: src/graphql
-extensions:
-  amplify:
-    version: 3
+        region: us-east-1
+        apiId: null
+        maxDepth: 2
