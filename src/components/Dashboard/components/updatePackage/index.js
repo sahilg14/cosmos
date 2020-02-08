@@ -5,8 +5,11 @@ import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import clsx from "clsx";
 import Select from "react-select";
+import CircularProgress from "@material-ui/core/CircularProgress";
+import API, { graphqlOperation } from "@aws-amplify/api";
 import Title from "../title";
 import useStyles from "../../styles";
+import { createEmployee } from "../../../../graphql/mutations";
 
 const options = [
   { value: "1", label: "Harnoor - 10002121" },
@@ -17,13 +20,22 @@ const options = [
 const EmployeeUpdate = () => {
   const [selectedOption, setSelectedOption] = React.useState(null);
   const [newID, setNewID] = React.useState("");
+  const [isAddloading, setIsAddLoading] = React.useState(false);
   const [newName, setNewName] = React.useState("");
   const handleChange = selectedOption => {
     setSelectedOption({ selectedOption });
     console.log(`Option selected:`, selectedOption);
   };
-  const handleAddID = (newID, newName) => {
+  const handleAddID = async (newID, newName) => {
+    setIsAddLoading(true);
     console.log(`New ID ${newID} and New Name: ${newName}`);
+    const employee = { id: newID, name: newName };
+    try {
+      await API.graphql(graphqlOperation(createEmployee, { input: employee }));
+    } catch (err) {
+      console.log(err.errors);
+    }
+    setIsAddLoading(false);
   };
   const classes = useStyles();
   const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
@@ -48,28 +60,42 @@ const EmployeeUpdate = () => {
           <form className={classes.form} noValidate>
             <TextField
               id="outlined-basic"
-              label="Name"
-              onChange={val => {
-                setNewID(val.target.value);
-              }}
-              variant="outlined"
-            />
-            <TextField
-              id="outlined-basic"
               label="ID"
               onChange={val => {
                 setNewName(val.target.value);
               }}
               variant="outlined"
             />
-            <Button
-              onClick={() => handleAddID(newID, newName)}
-              variant="contained"
-              color="primary"
-              className={classes.submit}
-            >
-              Add
-            </Button>
+            <TextField
+              id="outlined-basic"
+              label="Name"
+              onChange={val => {
+                setNewID(val.target.value);
+              }}
+              variant="outlined"
+            />
+
+            {!isAddloading ? (
+              <Button
+                onClick={() => handleAddID(newID, newName)}
+                variant="contained"
+                color="primary"
+                className={classes.submit}
+              >
+                Add
+              </Button>
+            ) : (
+              <Grid
+                style={{ textAlign: "center" }}
+                item
+                xs
+                direction="row"
+                justify="center"
+                alignItems="center"
+              >
+                <CircularProgress className={classes.progress} />
+              </Grid>
+            )}
           </form>
         </Paper>
       </Grid>
