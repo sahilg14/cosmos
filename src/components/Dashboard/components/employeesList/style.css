@@ -1,0 +1,10 @@
+.paper {
+    padding: 16px;
+    display: flex;
+    overflow: auto;
+    flex-direction: column;
+    height: 240px;
+  }
+  .progress{
+      width: 100%;
+  }
