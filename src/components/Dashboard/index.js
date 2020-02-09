@@ -20,7 +20,8 @@ import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import NotificationsIcon from "@material-ui/icons/Notifications";
 import PowerIcon from "@material-ui/icons/PowerSettingsNewOutlined";
 import { mainListItems, secondaryListItems } from "./components/listItems";
-import EmployeeUpdate from "./components/updatePackage";
+import EmployeeMain from "./components/employeeMain";
+import EmployeeRecords from "./components/employeeRecords";
 import Basic from "./components/basic";
 import "./styles.css";
 import useStyles from "./styles";
@@ -136,7 +137,11 @@ const Dashboard = () => {
           <Container maxWidth="lg" className={classes.container}>
             <Switch>
               <Route exact path="/dashboard" component={Basic} />
-              <Route path="/dashboard/employees" component={EmployeeUpdate} />
+              <Route path="/dashboard/employees" component={EmployeeMain} />
+              <Route
+                path="/dashboard/employee/:id"
+                component={EmployeeRecords}
+              />
             </Switch>
             <Box pt={4}>
               <Copyright />

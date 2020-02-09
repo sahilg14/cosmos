@@ -7,11 +7,12 @@ import clsx from "clsx";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import API, { graphqlOperation } from "@aws-amplify/api";
 import Title from "../title";
-import EmployeeList from "../employeesList";
+import EmployeeList from "./components/employeesList";
+import EmployeeEdit from "./components/employeeRemove";
 import useStyles from "../../styles";
 import { createEmployee } from "../../../../graphql/mutations";
 
-const EmployeeUpdate = () => {
+const EmployeeMain = () => {
   const [newID, setNewID] = React.useState("");
   const [isAddloading, setIsAddLoading] = React.useState(false);
   const [newName, setNewName] = React.useState("");
@@ -21,6 +22,8 @@ const EmployeeUpdate = () => {
     const employee = { id: newID, name: newName };
     try {
       await API.graphql(graphqlOperation(createEmployee, { input: employee }));
+      setNewID("");
+      setNewID("");
     } catch (err) {
       console.log(err.errors);
     }
@@ -30,22 +33,23 @@ const EmployeeUpdate = () => {
   return (
     <Grid container spacing={3}>
       <EmployeeList />
+      <EmployeeEdit />
       {/* Add a new ID */}
-      <Grid item xs={12} md={3} lg={3}>
+      <Grid item xs={12} md={4} lg={4}>
         <Paper className={clsx(classes.paper, classes.fixedHeightLong)}>
-          <Title>Add new employee ID</Title>
+          <Title>Add new employee</Title>
           <form className={classes.form} noValidate>
             <TextField
-              id="outlined-basic"
-              label="ID"
+              id="name"
+              label="Name"
               onChange={val => {
                 setNewName(val.target.value);
               }}
               variant="outlined"
             />
             <TextField
-              id="outlined-basic"
-              label="Name"
+              id="id"
+              label="ID"
               onChange={val => {
                 setNewID(val.target.value);
               }}
@@ -80,4 +84,4 @@ const EmployeeUpdate = () => {
   );
 };
 
-export default EmployeeUpdate;
+export default EmployeeMain;
