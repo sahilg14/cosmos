@@ -3,6 +3,8 @@
     display: flex;
     overflow: auto;
     flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: space-around;
   }
   .autoHeight{
       height: auto;

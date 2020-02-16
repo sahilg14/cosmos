@@ -4,6 +4,7 @@ import DateFnsUtils from "@date-io/date-fns";
 import Grid from "@material-ui/core/Grid";
 import TextField from "@material-ui/core/TextField";
 import Paper from "@material-ui/core/Paper";
+import Button from "@material-ui/core/Button";
 import { startOfWeek, eachDayOfInterval, addDays } from "date-fns";
 
 import "./styles.css";
@@ -44,7 +45,7 @@ class EmployeeRecords extends React.Component {
               <KeyboardDatePicker
                 margin="normal"
                 id="date-picker-dialog"
-                label="Date picker dialog"
+                label="Select payout week"
                 format="MM/dd/yyyy"
                 value={this.state.selectedDate}
                 onChange={this.handleDateChange}
@@ -53,6 +54,20 @@ class EmployeeRecords extends React.Component {
                 }}
               />
             </MuiPickersUtilsProvider>
+          </Paper>
+        </Grid>
+        <Grid item xs={12} md={6} lg={3}>
+          <Paper className="paper heightFixed">
+            <Button variant="contained" color="primary">
+              Send Email to Harnoor
+            </Button>
+          </Paper>
+        </Grid>
+        <Grid item xs={12} md={6} lg={3}>
+          <Paper className="paper heightFixed">
+            <Button variant="contained" color="primary">
+              Show contact Info
+            </Button>
           </Paper>
         </Grid>
         {/* Enter the Records */}
