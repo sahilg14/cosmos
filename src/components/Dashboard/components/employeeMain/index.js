@@ -7,7 +7,7 @@ import clsx from "clsx";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import API, { graphqlOperation } from "@aws-amplify/api";
 import Title from "../title";
-import EmployeeList from "./components/employeesList";
+import EmployeeList from "./components/employeesList/container";
 import EmployeeEdit from "./components/employeeRemove";
 import useStyles from "../../styles";
 import { createEmployee } from "../../../../graphql/mutations";

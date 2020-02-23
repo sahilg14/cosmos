@@ -21,7 +21,7 @@ import NotificationsIcon from "@material-ui/icons/Notifications";
 import PowerIcon from "@material-ui/icons/PowerSettingsNewOutlined";
 import { mainListItems, secondaryListItems } from "./components/listItems";
 import EmployeeMain from "./components/employeeMain";
-import EmployeeRecords from "./components/employeeRecords";
+import EmployeeRecords from "./components/employeeRecords/container";
 import Basic from "./components/basic";
 import "./styles.css";
 import useStyles from "./styles";
@@ -39,7 +39,7 @@ function Copyright() {
   );
 }
 
-const Dashboard = () => {
+const Dashboard = props => {
   const [isLoggedOut, setIsLoggedOut] = React.useState(false);
   const classes = useStyles();
   const [open, setOpen] = React.useState(true);

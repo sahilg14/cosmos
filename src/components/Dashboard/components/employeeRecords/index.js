@@ -16,6 +16,7 @@ import {
 class EmployeeRecords extends React.Component {
   constructor(props) {
     super(props);
+    console.log("Sahil -------", props.selectedEmployeeName);
     this.state = {
       selectedDate: new Date(),
       startOfWeek: startOfWeek(new Date(), {
@@ -32,11 +33,12 @@ class EmployeeRecords extends React.Component {
     });
   };
   render() {
+    console.log(this.props);
     return (
       <Grid container spacing={3}>
         <Grid item xs={12} md={6} lg={3}>
           <Paper className="paper heightFixed">
-            <h2>{this.props.match.params.id}</h2>
+            <h2>{this.props.selectedEmployeeName}</h2>
           </Paper>
         </Grid>
         <Grid item xs={12} md={6} lg={3}>
@@ -58,14 +60,14 @@ class EmployeeRecords extends React.Component {
         </Grid>
         <Grid item xs={12} md={6} lg={3}>
           <Paper className="paper heightFixed">
-            <Button variant="contained" color="primary">
-              Send Email to Harnoor
+            <Button variant="contained" color="primary" disabled>
+              Send Email to Employee
             </Button>
           </Paper>
         </Grid>
         <Grid item xs={12} md={6} lg={3}>
           <Paper className="paper heightFixed">
-            <Button variant="contained" color="primary">
+            <Button variant="contained" color="primary" disabled>
               Show contact Info
             </Button>
           </Paper>
@@ -78,7 +80,7 @@ class EmployeeRecords extends React.Component {
               end: addDays(this.state.startOfWeek, 6)
             }).map((p, idx) => {
               return (
-                <div class="recordInputs" key={idx}>
+                <div className="recordInputs" key={idx}>
                   <TextField
                     className="extraWidth"
                     id={`date-${idx}`}

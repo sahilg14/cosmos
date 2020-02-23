@@ -1,9 +1,12 @@
 import React from "react";
 import Grid from "@material-ui/core/Grid";
 import Paper from "@material-ui/core/Paper";
+import Button from "@material-ui/core/Button";
 import Select from "react-select";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import API, { graphqlOperation } from "@aws-amplify/api";
+import { Redirect } from "react-router-dom";
+
 import Title from "../../../title";
 import "./style.css";
 import * as queries from "../../../../../../graphql/queries";
@@ -12,9 +15,10 @@ class EmployeeList extends React.Component {
   constructor() {
     super();
     this.state = {
-      selectedValue: null,
+      selectedValue: { value: null, label: "" },
       isEmployeeListloading: true,
-      options: []
+      options: [],
+      redirectToEmployee: false
     };
   }
 
@@ -39,8 +43,19 @@ class EmployeeList extends React.Component {
   }
   handleChange(e) {
     this.setState({ ...this.state, selectedValue: e });
+    this.props.setSelectedEmployee(e.value, e.label);
+  }
+  handleEdit() {
+    this.setState({ ...this.state, redirectToEmployee: true });
   }
   render() {
+    if (this.state.redirectToEmployee === true) {
+      return (
+        <Redirect
+          to={`/dashboard/employee/${this.state.selectedValue.value}`}
+        />
+      );
+    }
     return (
       <Grid item xs={12} md={4} lg={4}>
         <Paper className={"paper"}>
@@ -66,6 +81,16 @@ class EmployeeList extends React.Component {
                 options={this.state.options}
               />
             </div>
+          )}
+          {this.state.selectedValue.value && (
+            <Button
+              onClick={() => this.handleEdit()}
+              variant="contained"
+              color="primary"
+              // className={classes.submit}
+            >
+              Edit Data
+            </Button>
           )}
         </Paper>
       </Grid>
