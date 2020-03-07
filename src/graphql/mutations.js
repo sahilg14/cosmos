@@ -12,6 +12,19 @@ export const createEmployee = /* GraphQL */ `
     }
   }
 `;
+
+export const createEmployeeRecord = /* GraphQL */ `
+  mutation CreateEmployeeRecord(
+    $input: CreateEmployeeInput!
+    $condition: ModelEmployeeConditionInput
+  ) {
+    createEmployee(input: $input, condition: $condition) {
+      id
+      name
+    }
+  }
+`;
+
 export const updateEmployee = /* GraphQL */ `
   mutation UpdateEmployee(
     $input: UpdateEmployeeInput!
