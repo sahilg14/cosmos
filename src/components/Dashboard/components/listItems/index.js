@@ -25,7 +25,7 @@ export const mainListItems = (
       <ListItemIcon>
         <ShoppingCartIcon />
       </ListItemIcon>
-      <ListItemText primary="Sabji" />
+      <ListItemText primary="Random" />
     </ListItem>
     <RouterLink to="/dashboard/employees">
       <ListItem button>
@@ -39,13 +39,13 @@ export const mainListItems = (
       <ListItemIcon>
         <BarChartIcon />
       </ListItemIcon>
-      <ListItemText primary="Gol Gappe" />
+      <ListItemText primary="More Random" />
     </ListItem>
     <ListItem button>
       <ListItemIcon>
         <LayersIcon />
       </ListItemIcon>
-      <ListItemText primary="Gulab Jamun" />
+      <ListItemText primary="Even more random" />
     </ListItem>
   </div>
 );
@@ -57,19 +57,19 @@ export const secondaryListItems = (
       <ListItemIcon>
         <AssignmentIcon />
       </ListItemIcon>
-      <ListItemText primary="Falana" />
+      <ListItemText primary="Recent Employees" />
     </ListItem>
     <ListItem button>
       <ListItemIcon>
         <AssignmentIcon />
       </ListItemIcon>
-      <ListItemText primary="Dhimka" />
+      <ListItemText primary="Recent Payouts" />
     </ListItem>
     <ListItem button>
       <ListItemIcon>
         <AssignmentIcon />
       </ListItemIcon>
-      <ListItemText primary="Oye hoye ni prinka" />
+      <ListItemText primary="Total Payouts" />
     </ListItem>
   </div>
 );

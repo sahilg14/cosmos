@@ -5,7 +5,7 @@ import Button from "@material-ui/core/Button";
 import Select from "react-select";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import API, { graphqlOperation } from "@aws-amplify/api";
-import { Redirect } from "react-router-dom";
+import { Link as RouterLink } from "react-router-dom";
 
 import Title from "../../../title";
 import "./style.css";
@@ -51,7 +51,7 @@ class EmployeeList extends React.Component {
   render() {
     if (this.state.redirectToEmployee === true) {
       return (
-        <Redirect
+        <RouterLink
           to={`/dashboard/employee/${this.state.selectedValue.value}`}
         />
       );
@@ -60,14 +60,7 @@ class EmployeeList extends React.Component {
       <Grid item xs={12} md={4} lg={4}>
         <Paper className={"paper"}>
           {this.state.isEmployeeListloading ? (
-            <Grid
-              style={{ textAlign: "center" }}
-              item
-              xs
-              direction="row"
-              justify="center"
-              alignItems="center"
-            >
+            <Grid style={{ textAlign: "center" }} item xs>
               <CircularProgress className={"progress"} />
             </Grid>
           ) : (
@@ -83,14 +76,24 @@ class EmployeeList extends React.Component {
             </div>
           )}
           {this.state.selectedValue.value && (
-            <Button
-              onClick={() => this.handleEdit()}
-              variant="contained"
-              color="primary"
-              // className={classes.submit}
+            <RouterLink
+              to={{
+                pathname: `/dashboard/employee/${this.state.selectedValue.value}`,
+                state: {
+                  selectedEmployeeName: this.state.selectedValue.label,
+                  selectedEmployeeId: this.state.selectedValue.value
+                }
+              }}
             >
-              Edit Data
-            </Button>
+              <Button
+                onClick={() => this.handleEdit()}
+                variant="contained"
+                color="primary"
+                // className={classes.submit}
+              >
+                Edit Data
+              </Button>
+            </RouterLink>
           )}
         </Paper>
       </Grid>

@@ -1,9 +1,7 @@
 import EmployeeRecords from "../index.js";
 import { connect } from "react-redux";
+import { withRouter } from "react-router-dom";
 
-const mapStateToProps = state => ({
-  selectedEmployeeName: state.getIn(["dashboard", "selectedEmployeeName"]),
-  selectedEmployeeId: state.getIn(["dashboard", "selectedEmployeeId"])
-});
+const mapStateToProps = state => ({});
 
-export default connect(mapStateToProps, null)(EmployeeRecords);
+export default withRouter(connect(mapStateToProps, null)(EmployeeRecords));

@@ -1,0 +1,23 @@
+{
+  "id": {
+    "date": {
+      "2017-9-10": {
+        "sp": 20,
+        "nsp": 21,
+        "spa": 105,
+        "nspa": 105
+      }
+    },
+    "week": {
+      "2017-9-10-to-2017-9-16": {
+        "zone2p": 100,
+        "zone2a": 35,
+        "weekTotal": 950,
+        "bgcNeg": 20,
+        "adminFeeNeg": 10,
+        "vARate": 0.14,
+        "vAPackages": 106
+      }
+    }
+  }
+}

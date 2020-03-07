@@ -1,8 +1,8 @@
 import { fromJS } from "immutable";
 import { SET_SELECTED_EMPLOYEE } from "./actions";
 const initialState = fromJS({
-  selectedEmployeeId: "",
-  selectedEmployeeName: ""
+  selectedEmployeeId: "default",
+  selectedEmployeeName: "Default"
 });
 export default (state = initialState, action) => {
   switch (action.type) {

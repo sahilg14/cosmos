@@ -18,7 +18,6 @@ const EmployeeMain = () => {
   const [newName, setNewName] = React.useState("");
   const handleAddID = async (newName, newID) => {
     setIsAddLoading(true);
-    console.log(`New ID ${newID} and New Name: ${newName}`);
     const employee = { id: newID, name: newName };
     try {
       await API.graphql(graphqlOperation(createEmployee, { input: employee }));
