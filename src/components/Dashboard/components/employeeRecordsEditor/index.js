@@ -35,16 +35,81 @@ const StyledTableRow = withStyles(theme => ({
 class EmployeeRecordsEditor extends React.Component {
   constructor(props) {
     super(props);
+    const startDate = startOfWeek(new Date(), {
+      weekStartsOn: 1
+    });
+    this.sp = React.createRef();
+    this.arrayOfWeek = eachDayOfInterval({
+      start: startDate,
+      end: addDays(startDate, 6)
+    });
     this.state = {
       selectedDate: new Date(),
       startOfWeek: startOfWeek(new Date(), {
         weekStartsOn: 1
-      })
+      }),
+      date: this.arrayOfWeek.reduce(
+        (o, key) => ({
+          ...o,
+          [key.toDateString()]: { sp: 20, nsp: 21, spa: 105, nspa: 105 }
+        }),
+        {}
+      )
     };
   }
 
+  updateWeeklyValue = (currentDate, field, value) => {
+    console.log("hey");
+    console.log("currentDate inside function", currentDate);
+    switch (field) {
+      case 0: //sp
+        this.setState({
+          ...this.state,
+          date: {
+            [currentDate]: {
+              sp: value
+            }
+          }
+        });
+        break;
+      case "spa":
+        this.setState({
+          ...this.state,
+          date: {
+            [currentDate]: {
+              spa: value
+            }
+          }
+        });
+        break;
+      case "nsp":
+        this.setState({
+          ...this.state,
+          date: {
+            [currentDate]: {
+              nsp: value
+            }
+          }
+        });
+        break;
+      case "nspa":
+        this.setState({
+          ...this.state,
+          date: {
+            [currentDate]: {
+              nspa: value
+            }
+          }
+        });
+        break;
+      default:
+        return this.state;
+    }
+  };
+
   handleDateChange = date => {
     this.setState({
+      ...this.state,
       selectedDate: date,
       startOfWeek: startOfWeek(date, {
         weekStartsOn: 1
@@ -52,115 +117,127 @@ class EmployeeRecordsEditor extends React.Component {
     });
   };
   render() {
+    console.log("sp ref value", this.sp);
+    let currentDate;
     return (
-      <Grid>
-        <TableContainer component={Paper}>
-          <Table aria-label="customized table">
-            <EmployeeRecordsHeader />
-            <TableBody>
-              {eachDayOfInterval({
-                start: this.state.startOfWeek,
-                end: addDays(this.state.startOfWeek, 6)
-              }).map((p, idx) => {
-                return (
-                  <StyledTableRow className="recordInputs" key={idx}>
-                    <StyledTableCell>
-                      <TextField
-                        className="extraWidth"
-                        id={`date-${idx}`}
-                        value={p.toDateString()}
-                        InputLabelProps={{ shrink: true }}
-                        label=""
-                        variant="filled"
-                        size="small"
-                      />
-                    </StyledTableCell>
-                    <StyledTableCell>
-                      <TextField
-                        id={`packagesSign-${idx}`}
-                        value={"10"}
-                        InputLabelProps={{ shrink: true }}
-                        label="Packages"
-                        variant="outlined"
-                        size="small"
-                      />
-                    </StyledTableCell>
-                    <StyledTableCell>
-                      <TextField
-                        id={`amountSign-${idx}`}
-                        value={""}
-                        InputLabelProps={{ shrink: true }}
-                        label="Amount"
-                        variant="outlined"
-                        size="small"
-                      />
-                    </StyledTableCell>
-                    <StyledTableCell>
-                      <TextField
-                        id={`packagesNoSign-${idx}`}
-                        value={""}
-                        InputLabelProps={{ shrink: true }}
-                        label="Packages"
-                        variant="outlined"
-                        size="small"
-                      />
-                    </StyledTableCell>
-                    <StyledTableCell>
-                      <TextField
-                        id={`amountNoSign-${idx}`}
-                        value={""}
-                        InputLabelProps={{ shrink: true }}
-                        label="Amount"
-                        variant="outlined"
-                        size="small"
-                      />
-                    </StyledTableCell>
-                    <StyledTableCell>Total 20</StyledTableCell>
-                    <StyledTableCell>Total 30</StyledTableCell>
-                  </StyledTableRow>
-                );
-              })}
-              <StyledTableRow className="recordInputs">
-                <StyledTableCell colSpan={5} align="right">
-                  TOTAL
-                </StyledTableCell>
-                <StyledTableCell align="center">90</StyledTableCell>
-                <StyledTableCell align="center">35</StyledTableCell>
-              </StyledTableRow>
-              <StyledTableRow className="recordInputs">
-                <StyledTableCell colSpan={4} align="right">
-                  ZONE 2
-                </StyledTableCell>
-                <StyledTableCell align="center">
-                  <TextField
-                    id={`amountNoSign`}
-                    value={"0.5"}
-                    InputLabelProps={{ shrink: true }}
-                    label="Rate"
-                    variant="outlined"
-                    size="small"
-                  />
-                </StyledTableCell>
-                <StyledTableCell align="center">
-                  <TextField
-                    id={`amountNoSign`}
-                    value={""}
-                    InputLabelProps={{ shrink: true }}
-                    label="Packages"
-                    variant="outlined"
-                    size="small"
-                  />
-                </StyledTableCell>
-                <StyledTableCell align="center">35</StyledTableCell>
-              </StyledTableRow>
-            </TableBody>
-          </Table>
-        </TableContainer>
-        {/* Vehicle Allowance */}
+      <Grid item xs={12}>
         <Grid item xs={12}>
           <TableContainer component={Paper}>
             <Table aria-label="customized table">
+              <EmployeeRecordsHeader />
               <TableBody>
+                {this.arrayOfWeek.map((p, idx) => {
+                  currentDate = p.toDateString();
+                  return (
+                    <StyledTableRow className="recordInputs" key={idx}>
+                      <StyledTableCell align="center">
+                        <TextField
+                          className="extraWidth"
+                          id={currentDate}
+                          value={currentDate}
+                          InputLabelProps={{ shrink: true }}
+                          label=""
+                          variant="filled"
+                          size="small"
+                        />
+                      </StyledTableCell>
+                      <StyledTableCell align="center">
+                        <TextField
+                          ref={() => (this.sp.current.currentDate = "2")}
+                          id={`${currentDate}-sp`}
+                          value={"2"}
+                          onChange={e => {
+                            this.updateWeeklyValue(
+                              e.target.id.split("-")[0],
+                              0,
+                              e.target.value
+                            );
+                          }}
+                          InputLabelProps={{ shrink: true }}
+                          label="Packages"
+                          variant="outlined"
+                          size="small"
+                        />
+                      </StyledTableCell>
+                      <StyledTableCell align="center">
+                        <TextField
+                          id={`${currentDate}-spa`}
+                          value={""}
+                          InputLabelProps={{ shrink: true }}
+                          label="Amount"
+                          variant="outlined"
+                          size="small"
+                        />
+                      </StyledTableCell>
+                      <StyledTableCell align="center">
+                        <TextField
+                          id={`${currentDate}-nsp`}
+                          value={""}
+                          InputLabelProps={{ shrink: true }}
+                          label="Packages"
+                          variant="outlined"
+                          size="small"
+                        />
+                      </StyledTableCell>
+                      <StyledTableCell align="center">
+                        <TextField
+                          id={`${currentDate}-nspa`}
+                          value={""}
+                          InputLabelProps={{ shrink: true }}
+                          label="Amount"
+                          variant="outlined"
+                          size="small"
+                        />
+                      </StyledTableCell>
+                      <StyledTableCell align="center">Total 20</StyledTableCell>
+                      <StyledTableCell align="center">Total 30</StyledTableCell>
+                    </StyledTableRow>
+                  );
+                })}
+                <StyledTableRow className="recordInputs">
+                  <StyledTableCell colSpan={5} align="right">
+                    TOTAL
+                  </StyledTableCell>
+                  <StyledTableCell align="center">90</StyledTableCell>
+                  <StyledTableCell align="center">35</StyledTableCell>
+                </StyledTableRow>
+                <StyledTableRow className="recordInputs">
+                  <StyledTableCell colSpan={4} align="left">
+                    ZONE 2
+                  </StyledTableCell>
+                  <StyledTableCell align="center">
+                    <TextField
+                      id={`amountNoSign`}
+                      value={"0.5"}
+                      InputLabelProps={{ shrink: true }}
+                      label="Rate"
+                      variant="outlined"
+                      size="small"
+                    />
+                  </StyledTableCell>
+                  <StyledTableCell align="center">
+                    <TextField
+                      id={`amountNoSign`}
+                      value={""}
+                      InputLabelProps={{ shrink: true }}
+                      label="Packages"
+                      variant="outlined"
+                      size="small"
+                    />
+                  </StyledTableCell>
+                  <StyledTableCell align="center">35</StyledTableCell>
+                </StyledTableRow>
+                <StyledTableRow className="recordInputs">
+                  <StyledTableCell colSpan={6} align="left">
+                    Week Total
+                  </StyledTableCell>
+                  <StyledTableCell className="primeStuff" align="center">
+                    $950
+                  </StyledTableCell>
+                </StyledTableRow>
+
+                {/* Vehicle Allowance */}
+
                 <StyledTableRow className="recordInputs">
                   <StyledTableCell colSpan={4}>
                     Vehicle Allowance
@@ -185,8 +262,48 @@ class EmployeeRecordsEditor extends React.Component {
                       size="small"
                     />
                   </StyledTableCell>
-                  <StyledTableCell className="primeStuff" align="center">
-                    $950
+                  <StyledTableCell align="center">$950</StyledTableCell>
+                </StyledTableRow>
+
+                {/* Background Check */}
+
+                <StyledTableRow className="recordInputs">
+                  <StyledTableCell colSpan={6}>
+                    Background Check
+                  </StyledTableCell>
+                  <StyledTableCell className="minus normalCell" align="center">
+                    <TextField
+                      id={`amountNoSign`}
+                      value={""}
+                      InputLabelProps={{ shrink: true }}
+                      label="Rate"
+                      variant="outlined"
+                      size="small"
+                    />
+                  </StyledTableCell>
+                </StyledTableRow>
+                <StyledTableRow className="recordInputs">
+                  <StyledTableCell colSpan={6}>Admin Fees</StyledTableCell>
+                  <StyledTableCell className="minus normalCell" align="center">
+                    <TextField
+                      id={`amountNoSign`}
+                      value={""}
+                      InputLabelProps={{ shrink: true }}
+                      label="Rate"
+                      variant="outlined"
+                      size="small"
+                    />
+                  </StyledTableCell>
+                </StyledTableRow>
+
+                {/* Final Value */}
+
+                <StyledTableRow className="recordInputs">
+                  <StyledTableCell colSpan={6} align="right">
+                    TOTAL PAYOUT
+                  </StyledTableCell>
+                  <StyledTableCell className="cash" align="center">
+                    $1200.00
                   </StyledTableCell>
                 </StyledTableRow>
               </TableBody>

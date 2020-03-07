@@ -23,7 +23,7 @@
   justify-content: space-evenly;
 }
 .recordInputs input {
-  width: 80px;
+  width: 60px;
 }
 .extraWidth input {
   width: 140px;
@@ -38,11 +38,15 @@
   background: rgb(178, 238, 178);
 }
 .minus {
-  background: palevioletred;
+  background: rgb(248, 188, 208);
 }
 .cash {
   background: green;
+  width: 200px;
+  color: white !important;
+  font-weight: bold !important;
 }
-.MuiTableCell-head {
-  line-height: 0.5rem !important;
+
+.normalCell {
+  width: 150px;
 }

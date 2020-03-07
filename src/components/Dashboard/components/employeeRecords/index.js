@@ -105,119 +105,104 @@ class EmployeeRecords extends React.Component {
           </Paper>
         </Grid>
         {/* Show the Records */}
-        <Grid item xs={12}>
-          {!this.state.updateMode ? (
-            <TableContainer component={Paper}>
-              <Table aria-label="customized table">
-                <EmployeeRecordsHeader />
+        {!this.state.updateMode ? (
+          <Grid item xs={12}>
+            <Grid item xs={12}>
+              <TableContainer component={Paper}>
+                <Table aria-label="customized table">
+                  <EmployeeRecordsHeader />
 
-                <TableBody>
-                  {eachDayOfInterval({
-                    start: this.state.startOfWeek,
-                    end: addDays(this.state.startOfWeek, 6)
-                  }).map((p, idx) => {
-                    return (
-                      <StyledTableRow className="recordInputs" key={idx}>
-                        <StyledTableCell align="center">
-                          {p.toDateString()}
-                        </StyledTableCell>
-                        <StyledTableCell align="center">20</StyledTableCell>
-                        <StyledTableCell align="center">30</StyledTableCell>
-                        <StyledTableCell align="center">40</StyledTableCell>
-                        <StyledTableCell align="center">50</StyledTableCell>
-                        <StyledTableCell align="center">60</StyledTableCell>
-                        <StyledTableCell align="center">70</StyledTableCell>
-                      </StyledTableRow>
-                    );
-                  })}
-                  <StyledTableRow className="recordInputs">
-                    <StyledTableCell colSpan={5} align="right">
-                      TOTAL
-                    </StyledTableCell>
-                    <StyledTableCell align="center">181</StyledTableCell>
-                    <StyledTableCell align="center">97</StyledTableCell>
-                  </StyledTableRow>
-                  <StyledTableRow className="recordInputs">
-                    <StyledTableCell colSpan={5} align="right">
-                      ZONE 2
-                    </StyledTableCell>
-                    <StyledTableCell align="center">117</StyledTableCell>
-                    <StyledTableCell align="center">35</StyledTableCell>
-                  </StyledTableRow>
-                  <StyledTableRow className="recordInputs">
-                    <StyledTableCell colSpan={4}></StyledTableCell>
-                    <StyledTableCell colSpan={2} align="right">
-                      Week Total
-                    </StyledTableCell>
-                    <StyledTableCell className="primeStuff" align="center">
-                      $950
-                    </StyledTableCell>
-                  </StyledTableRow>
-                </TableBody>
-              </Table>
-            </TableContainer>
-          ) : (
-            <EmployeeRecordsEditor />
-          )}
-        </Grid>
+                  <TableBody>
+                    {eachDayOfInterval({
+                      start: this.state.startOfWeek,
+                      end: addDays(this.state.startOfWeek, 6)
+                    }).map((p, idx) => {
+                      return (
+                        <StyledTableRow className="recordInputs" key={idx}>
+                          <StyledTableCell align="center">
+                            {p.toDateString()}
+                          </StyledTableCell>
+                          <StyledTableCell align="center">20</StyledTableCell>
+                          <StyledTableCell align="center">30</StyledTableCell>
+                          <StyledTableCell align="center">40</StyledTableCell>
+                          <StyledTableCell align="center">50</StyledTableCell>
+                          <StyledTableCell align="center">60</StyledTableCell>
+                          <StyledTableCell align="center">70</StyledTableCell>
+                        </StyledTableRow>
+                      );
+                    })}
+                    <StyledTableRow className="recordInputs">
+                      <StyledTableCell colSpan={5} align="right">
+                        TOTAL
+                      </StyledTableCell>
+                      <StyledTableCell align="center">181</StyledTableCell>
+                      <StyledTableCell align="center">97</StyledTableCell>
+                    </StyledTableRow>
+                    <StyledTableRow className="recordInputs">
+                      <StyledTableCell colSpan={4} align="left">
+                        ZONE 2
+                      </StyledTableCell>
+                      <StyledTableCell align="center">
+                        Rate: $0.14
+                      </StyledTableCell>
+                      <StyledTableCell align="center">117</StyledTableCell>
+                      <StyledTableCell align="center">35</StyledTableCell>
+                    </StyledTableRow>
+                    <StyledTableRow className="recordInputs">
+                      <StyledTableCell colSpan={6} align="left">
+                        Week Total
+                      </StyledTableCell>
+                      <StyledTableCell className="primeStuff" align="center">
+                        $950
+                      </StyledTableCell>
+                    </StyledTableRow>
+                    <StyledTableRow className="recordInputs">
+                      <StyledTableCell colSpan={4}>
+                        Vehicle Allowance
+                      </StyledTableCell>
+                      <StyledTableCell align="center">
+                        Rate: $0.14
+                      </StyledTableCell>
+                      <StyledTableCell align="center">106</StyledTableCell>
 
-        <Grid item xs={12}>
-          <TableContainer component={Paper}>
-            <Table aria-label="customized table">
-              <TableBody>
-                <StyledTableRow className="recordInputs">
-                  <StyledTableCell colSpan={4}>
-                    Vehicle Allowance
-                  </StyledTableCell>
-                  <StyledTableCell align="center">$0.14</StyledTableCell>
-                  <StyledTableCell align="center">106</StyledTableCell>
-
-                  <StyledTableCell className="primeStuff" align="center">
-                    $950
-                  </StyledTableCell>
-                </StyledTableRow>
-              </TableBody>
-            </Table>
-          </TableContainer>
-        </Grid>
-
-        <Grid item xs={12}>
-          <TableContainer component={Paper}>
-            <Table aria-label="customized table">
-              <TableBody>
-                <StyledTableRow className="recordInputs">
-                  <StyledTableCell colSpan={6}>
-                    Background Check
-                  </StyledTableCell>
-                  <StyledTableCell className="minus" align="center">
-                    $90
-                  </StyledTableCell>
-                </StyledTableRow>
-                <StyledTableRow className="recordInputs">
-                  <StyledTableCell colSpan={6}>Admin Fees</StyledTableCell>
-                  <StyledTableCell className="minus" align="center">
-                    $100
-                  </StyledTableCell>
-                </StyledTableRow>
-              </TableBody>
-            </Table>
-          </TableContainer>
-        </Grid>
-
-        <Grid item xs={12}>
-          <TableContainer component={Paper}>
-            <Table aria-label="customized table">
-              <TableBody>
-                <StyledTableRow className="recordInputs">
-                  <StyledTableCell colSpan={6}>TOTAL Payout</StyledTableCell>
-                  <StyledTableCell className="cash" align="center">
-                    $1200.00
-                  </StyledTableCell>
-                </StyledTableRow>
-              </TableBody>
-            </Table>
-          </TableContainer>
-        </Grid>
+                      <StyledTableCell align="center">$950</StyledTableCell>
+                    </StyledTableRow>
+                    <StyledTableRow className="recordInputs">
+                      <StyledTableCell colSpan={6}>
+                        Background Check
+                      </StyledTableCell>
+                      <StyledTableCell
+                        className="minus normalCell"
+                        align="center"
+                      >
+                        $90
+                      </StyledTableCell>
+                    </StyledTableRow>
+                    <StyledTableRow className="recordInputs">
+                      <StyledTableCell colSpan={6}>Admin Fees</StyledTableCell>
+                      <StyledTableCell
+                        className="minus normalCell"
+                        align="center"
+                      >
+                        $100
+                      </StyledTableCell>
+                    </StyledTableRow>
+                    <StyledTableRow className="recordInputs">
+                      <StyledTableCell align="right" colSpan={6}>
+                        TOTAL PAYOUT
+                      </StyledTableCell>
+                      <StyledTableCell className="cash" align="center">
+                        $1200.00
+                      </StyledTableCell>
+                    </StyledTableRow>
+                  </TableBody>
+                </Table>
+              </TableContainer>
+            </Grid>
+          </Grid>
+        ) : (
+          <EmployeeRecordsEditor />
+        )}
       </Grid>
     );
   }
