@@ -12,7 +12,7 @@ class Application extends React.Component {
       <div>
         <Router>
           <Route exact path="/" component={SignIn} />
-          <Route path="/registration" component={SignUp} />
+          <Route path="/signup" component={SignUp} />
           <Route path="/dashboard" component={Dashboard} />
         </Router>
       </div>

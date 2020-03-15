@@ -24,7 +24,7 @@ const EmployeeMain = () => {
       setNewID("");
       setNewID("");
     } catch (err) {
-      console.log(err.errors);
+      console.log(err);
     }
     setIsAddLoading(false);
   };
