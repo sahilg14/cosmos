@@ -6,11 +6,10 @@
 		}
 	},
 	"auth": {
-		"cosmos194124bc": {
+		"cosmos5ca380ba5ca380ba": {
 			"service": "Cognito",
 			"providerPlugin": "awscloudformation",
-			"dependsOn": [],
-			"customAuth": false
+			"dependsOn": []
 		}
 	},
 	"api": {

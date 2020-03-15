@@ -1,8 +1,8 @@
 {
-    "identityPoolName": "cosmos194124bc_identitypool_194124bc",
+    "identityPoolName": "cosmos5ca380ba_identitypool_5ca380ba",
     "allowUnauthenticatedIdentities": false,
-    "resourceNameTruncated": "cosmos194124bc",
-    "userPoolName": "cosmos194124bc_userpool_194124bc",
+    "resourceNameTruncated": "cosmos5ca380ba",
+    "userPoolName": "cosmos5ca380ba_userpool_5ca380ba",
     "autoVerifiedAttributes": [
         "email"
     ],
@@ -18,7 +18,9 @@
     "passwordPolicyMinLength": 8,
     "passwordPolicyCharacters": [],
     "requiredAttributes": [
-        "email"
+        "email",
+        "family_name",
+        "given_name"
     ],
     "userpoolClientGenerateSecret": true,
     "userpoolClientRefreshTokenValidity": 30,
@@ -28,10 +30,21 @@
     "userpoolClientReadAttributes": [
         "email"
     ],
-    "userpoolClientLambdaRole": "cosmos194124bc_userpoolclient_lambda_role",
+    "userpoolClientLambdaRole": "cosmos5ca380ba_userpoolclient_lambda_role",
     "userpoolClientSetAttributes": false,
-    "resourceName": "cosmos194124bc",
+    "useDefault": "manual",
     "authSelections": "identityPoolAndUserPool",
+    "resourceName": "cosmos5ca380ba5ca380ba",
+    "thirdPartyAuth": true,
+    "authProviders": [],
+    "usernameAttributes": [
+        "email"
+    ],
+    "userPoolGroups": false,
+    "adminQueries": false,
+    "triggers": "{}",
+    "hostedUI": false,
+    "userPoolGroupList": [],
     "authRoleArn": {
         "Fn::GetAtt": [
             "AuthRole",
@@ -44,10 +57,9 @@
             "Arn"
         ]
     },
-    "useDefault": "default",
-    "usernameAttributes": [
-        "email"
-    ],
-    "userPoolGroupList": [],
+    "parentStack": {
+        "Ref": "AWS::StackId"
+    },
+    "permissions": [],
     "dependsOn": []
 }

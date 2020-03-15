@@ -5,6 +5,7 @@ import CssBaseline from "@material-ui/core/CssBaseline";
 import TextField from "@material-ui/core/TextField";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Checkbox from "@material-ui/core/Checkbox";
+import { Link as RouterLink } from "react-router-dom";
 import Link from "@material-ui/core/Link";
 import Grid from "@material-ui/core/Grid";
 import Box from "@material-ui/core/Box";
@@ -62,9 +63,8 @@ const SignUp = () => {
       await Auth.signUp({
         username: email,
         password,
-        attributes: { email, firstName, lastName }
+        attributes: { email, given_name: firstName, family_name: lastName }
       });
-      console.log("signed up sucessfully. Yay!");
       setStep(2);
     } catch (err) {
       console.log("this was the error: ", err);
@@ -72,10 +72,9 @@ const SignUp = () => {
   };
   const confirmUserSignUp = async e => {
     e.preventDefault();
-    console.log(email, authenticationCode);
     try {
-      await Auth.confirmSignUp({ username: email, code: authenticationCode });
-      console.log("User is successfully signed up");
+      await Auth.confirmSignUp(email, authenticationCode);
+      setStep(3);
     } catch (err) {
       console.log("This was the error: ", err);
     }
@@ -199,11 +198,28 @@ const SignUp = () => {
             </form>
           </div>
         )}
+        {step === 3 && (
+          <div>
+            <Typography component="h3" variant="h5">
+              You have successfully signed up.
+            </Typography>
+            <RouterLink to="/">
+              <Button
+                fullWidth
+                variant="contained"
+                color="primary"
+                className={classes.submit}
+              >
+                SignIn
+              </Button>
+            </RouterLink>
+          </div>
+        )}
         <Grid container justify="flex-end">
           <Grid item>
-            <Link href="#" variant="body2">
-              Already have an account? Sign in
-            </Link>
+            <RouterLink to="/">
+              <Link variant="body2">{"Already have an account? Sign in"}</Link>
+            </RouterLink>
           </Grid>
         </Grid>
       </div>
