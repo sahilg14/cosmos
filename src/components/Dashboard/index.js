@@ -40,6 +40,7 @@ function Copyright() {
 }
 
 const Dashboard = props => {
+  console.log(props);
   const [isLoggedOut, setIsLoggedOut] = React.useState(false);
   const classes = useStyles();
   const [open, setOpen] = React.useState(true);
@@ -98,7 +99,7 @@ const Dashboard = props => {
               noWrap
               className={classes.title}
             >
-              Dashboard
+              {`Dashboard - Welcome ${props.selectedEmployeeId} ${props.signedInUserName}`}
             </Typography>
             <IconButton color="inherit">
               <Badge badgeContent={4} color="secondary">

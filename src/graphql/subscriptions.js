@@ -6,6 +6,10 @@ export const onCreateEmployee = /* GraphQL */ `
     onCreateEmployee {
       id
       name
+      manager
+      _version
+      _deleted
+      _lastChangedAt
     }
   }
 `;
@@ -14,6 +18,10 @@ export const onUpdateEmployee = /* GraphQL */ `
     onUpdateEmployee {
       id
       name
+      manager
+      _version
+      _deleted
+      _lastChangedAt
     }
   }
 `;
@@ -22,6 +30,10 @@ export const onDeleteEmployee = /* GraphQL */ `
     onDeleteEmployee {
       id
       name
+      manager
+      _version
+      _deleted
+      _lastChangedAt
     }
   }
 `;

@@ -5,6 +5,7 @@ import Button from "@material-ui/core/Button";
 import Select from "react-select";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import API, { graphqlOperation } from "@aws-amplify/api";
+import { Auth } from "aws-amplify";
 import { Link as RouterLink } from "react-router-dom";
 
 import Title from "../../../title";
@@ -21,13 +22,26 @@ class EmployeeList extends React.Component {
       redirectToEmployee: false
     };
   }
+  currentManager = async () => {
+    try {
+      const user = await Auth.currentAuthenticatedUser({
+        bypassCache: true
+      });
+      return user.signInUserSession.idToken.payload.email;
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   componentDidMount() {
     let allOptions = [];
     const loadEmployees = async () => {
+      const manager = await this.currentManager();
       try {
         let allEmployees = await API.graphql(
-          graphqlOperation(queries.listEmployees)
+          graphqlOperation(queries.listEmployees, {
+            filter: { manager: { eq: manager } }
+          })
         );
         allEmployees = allEmployees.data.listEmployees.items;
         allEmployees.forEach(p => {

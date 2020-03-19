@@ -218,7 +218,7 @@ const SignUp = () => {
         <Grid container justify="flex-end">
           <Grid item>
             <RouterLink to="/">
-              <Link variant="body2">{"Already have an account? Sign in"}</Link>
+              <p variant="body2">{"Already have an account? Sign in"}</p>
             </RouterLink>
           </Grid>
         </Grid>

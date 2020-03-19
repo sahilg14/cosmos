@@ -49,7 +49,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const SignIn = () => {
+const SignIn = props => {
   const [email, setEmail] = useState("");
   const [pass, setPass] = useState("");
   const [error, setError] = useState(false);
@@ -70,7 +70,8 @@ const SignIn = () => {
 
     Auth.signIn(email, pass)
       .then(user => {
-        console.log(user);
+        console.log(user.signInUserSession.idToken.payload);
+        props.setSignedInUserInfo(user.signInUserSession.idToken.payload);
         setIsLoading(false);
         setIsLoggedIn(true);
       })
@@ -179,12 +180,12 @@ const SignIn = () => {
           <Grid container direction="row" justify="center" alignItems="center">
             <Grid item xs>
               <RouterLink to="/forgotpassword">
-                <Link variant="body2">{"Forgot your password ?"}</Link>
+                <p variant="body2">{"Forgot your password ?"}</p>
               </RouterLink>
             </Grid>
             <Grid item xs>
               <RouterLink to="/signup">
-                <Link variant="body2">{"Sign Up for a new account."}</Link>
+                <p variant="body2">{"Sign Up for a new account."}</p>
               </RouterLink>
             </Grid>
           </Grid>

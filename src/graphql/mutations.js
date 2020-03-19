@@ -9,6 +9,10 @@ export const createEmployee = /* GraphQL */ `
     createEmployee(input: $input, condition: $condition) {
       id
       name
+      manager
+      _version
+      _deleted
+      _lastChangedAt
     }
   }
 `;
@@ -20,6 +24,10 @@ export const updateEmployee = /* GraphQL */ `
     updateEmployee(input: $input, condition: $condition) {
       id
       name
+      manager
+      _version
+      _deleted
+      _lastChangedAt
     }
   }
 `;
@@ -31,6 +39,10 @@ export const deleteEmployee = /* GraphQL */ `
     deleteEmployee(input: $input, condition: $condition) {
       id
       name
+      manager
+      _version
+      _deleted
+      _lastChangedAt
     }
   }
 `;

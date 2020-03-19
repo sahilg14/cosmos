@@ -6,6 +6,7 @@ import Button from "@material-ui/core/Button";
 import clsx from "clsx";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import API, { graphqlOperation } from "@aws-amplify/api";
+import { Auth } from "aws-amplify";
 import Title from "../title";
 import EmployeeList from "./components/employeesList/container";
 import EmployeeEdit from "./components/employeeRemove";
@@ -16,13 +17,26 @@ const EmployeeMain = () => {
   const [newID, setNewID] = React.useState("");
   const [isAddloading, setIsAddLoading] = React.useState(false);
   const [newName, setNewName] = React.useState("");
+  const currentManager = async () => {
+    try {
+      const user = await Auth.currentAuthenticatedUser({
+        bypassCache: true
+      });
+      return user.signInUserSession.idToken.payload.email;
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   const handleAddID = async (newName, newID) => {
+    const manager = await currentManager();
     setIsAddLoading(true);
-    const employee = { id: newID, name: newName };
+    const employee = { id: newID, name: newName, manager };
+    console.log({ employee });
     try {
       await API.graphql(graphqlOperation(createEmployee, { input: employee }));
       setNewID("");
-      setNewID("");
+      setNewName("");
     } catch (err) {
       console.log(err);
     }

@@ -1,5 +1,5 @@
-type Employee
- @model {
+type Employee @model {
   id: ID!
   name: String!
+  manager: String!
 }

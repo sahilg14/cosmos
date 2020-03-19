@@ -1,6 +1,6 @@
 import React from "react";
 import { Route, BrowserRouter as Router } from "react-router-dom";
-import SignIn from "../SignIn";
+import SignIn from "../SignIn/container";
 import SignUp from "../SignUp";
 import Dashboard from "../Dashboard/container";
 import "typeface-roboto";
