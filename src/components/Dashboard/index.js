@@ -40,8 +40,8 @@ function Copyright() {
 }
 
 const Dashboard = props => {
-  console.log(props);
   const [isLoggedOut, setIsLoggedOut] = React.useState(false);
+  const [currentUserName, setCurrentUserName] = React.useState("");
   const classes = useStyles();
   const [open, setOpen] = React.useState(true);
   const handleDrawerOpen = () => {
@@ -69,11 +69,22 @@ const Dashboard = props => {
       });
   };
 
+  (() => {
+    Auth.currentAuthenticatedUser()
+      .then(data => {
+        setCurrentUserName(data.signInUserSession.idToken.payload.given_name);
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  })();
+
+  if (isLoggedOut) return <Redirect push to="/" />;
+
   return (
     <Router>
       <div className={classes.root}>
         {checkIfSignedOut()}
-        {isLoggedOut && <Redirect to="/" />}
         <CssBaseline />
         <AppBar
           position="absolute"
@@ -99,7 +110,7 @@ const Dashboard = props => {
               noWrap
               className={classes.title}
             >
-              {`Dashboard - Welcome ${props.selectedEmployeeId} ${props.signedInUserName}`}
+              {`Dashboard - Welcome ${currentUserName}`}
             </Typography>
             <IconButton color="inherit">
               <Badge badgeContent={4} color="secondary">

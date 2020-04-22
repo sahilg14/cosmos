@@ -70,8 +70,6 @@ const SignIn = props => {
 
     Auth.signIn(email, pass)
       .then(user => {
-        console.log(user.signInUserSession.idToken.payload);
-        props.setSignedInUserInfo(user.signInUserSession.idToken.payload);
         setIsLoading(false);
         setIsLoggedIn(true);
       })
@@ -165,14 +163,7 @@ const SignIn = props => {
                 Sign In
               </Button>
             ) : (
-              <Grid
-                style={{ textAlign: "center" }}
-                item
-                xs
-                direction="row"
-                justify="center"
-                alignItems="center"
-              >
+              <Grid style={{ textAlign: "center" }} item xs>
                 <CircularProgress className={classes.progress} />
               </Grid>
             )}

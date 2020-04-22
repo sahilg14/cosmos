@@ -44,7 +44,7 @@ const EmployeeMain = () => {
   };
   const classes = useStyles();
   return (
-    <Grid container spacing={3}>
+    <Grid alignItems="center" container spacing={3}>
       <EmployeeList />
       <EmployeeEdit />
       {/* Add a new ID */}
@@ -85,7 +85,6 @@ const EmployeeMain = () => {
                 xs
                 direction="row"
                 justify="center"
-                alignItems="center"
               >
                 <CircularProgress className={classes.progress} />
               </Grid>
